@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GraphController">
    <center>
-      <AnchorPane prefHeight="316.0" prefWidth="746.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="graphArea" onMouseClicked="#addCircle" prefHeight="316.0" prefWidth="746.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Graph Visualizer">
                <font>
