@@ -3,10 +3,11 @@ package Main;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 public class DrawShapes {
-    public static void drawCircle(double x, double y, int number,Color color, AnchorPane graphArea)
+    public static void drawNode(double x, double y, int number, Color color, AnchorPane graphArea)
     {
         // This function creates a circle and also add a text to it and makes it a child of graphArea
         // And also assigns an id to it
@@ -24,5 +25,24 @@ public class DrawShapes {
         // Adding both circle and text as children of the graph area
         graphArea.getChildren().add(circle);
         graphArea.getChildren().add(text);
+    }
+
+    public static void drawEdge(Circle source, Circle destination, AnchorPane graphArea) {
+        // getting the starting and ending points for drawing the line
+        double x1 = source.getCenterX(), y1 = source.getCenterY();
+        double x2 = destination.getCenterX(), y2 = destination.getCenterY();
+
+        // Creating a line :
+        Line line = new Line(x1, y1, x2, y2);
+        line.setStrokeWidth(3);
+        line.setViewOrder(100);
+
+        // Setting id of the line
+        int u = Integer.parseInt(source.getId().split("__")[1]);
+        int v = Integer.parseInt(destination.getId().split("__")[1]);
+        line.setId("line__" + u + "__" + v);
+
+        // Adding the line to the graphArea
+        graphArea.getChildren().add(line);
     }
 }
