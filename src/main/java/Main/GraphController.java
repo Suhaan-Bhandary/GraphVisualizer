@@ -1,6 +1,7 @@
 package Main;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -63,5 +64,20 @@ public class GraphController {
             initialSelectedCircle.setFill(Color.LIGHTSKYBLUE);
             initialSelectedCircle = null;
         }
+    }
+
+    // Function to reset the graph and the graph area
+    public void resetGraph()
+    {
+        System.out.println("Resetting the graph");
+
+        // Clearing all the graph data in memory
+        count = 0;
+        graph.reset();
+
+        // Removing all the visual elements except the headerText
+        Label headerText = (Label) graphArea.lookup("#headerText");
+        graphArea.getChildren().clear();
+        graphArea.getChildren().add(headerText);
     }
 }

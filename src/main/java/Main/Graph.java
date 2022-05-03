@@ -103,4 +103,16 @@ public class Graph {
 
         return new Pair<>(layers, reversePath);
     }
+
+    public void reset()
+    {
+        vertices = 0;
+        for (int i = 0; i < 30; i++)
+        {
+            for (int j = 0; j < 30; j++)
+            {
+                matrix[i][j] = 0;
+            }
+        }
+    }
 }
