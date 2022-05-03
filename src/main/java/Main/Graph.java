@@ -64,9 +64,14 @@ public class Graph {
 
         while (!q.isEmpty())
         {
+            boolean isDestinationLayer = false;
+
             int curr = q.remove();
             layer.add(curr);
             count--;
+
+            // If destination is found then mark isDestination layer as true
+            if(curr == destination) isDestinationLayer = true;
 
             for(int i = 0; i < vertices; i++)
             {
@@ -80,12 +85,15 @@ public class Graph {
             }
 
             if (count == 0) {
+                // Add the current layer to the layers stack
                 layers.add((ArrayList<Integer>) layer.clone());
                 layer.clear();
 
+                // Break from the loop if the current layer is the destination layer
+                if(isDestinationLayer) break;
+
                 count = next_count;
                 next_count = 0;
-                System.out.println();
             }
         }
 
