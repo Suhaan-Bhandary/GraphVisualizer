@@ -1,11 +1,16 @@
 package Main;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
 
 public class GraphController {
     private final Graph graph = new Graph();
@@ -13,10 +18,58 @@ public class GraphController {
     // Variables related to graph drawing
     @FXML
     private AnchorPane graphArea;
+    @FXML
+    private TextField sourceField, destinationField, weightField;
+
     private int count = 0;
 
     // Variable to contain the first circle selected
     private Circle initialSelectedCircle = null;
+
+    // Function to visualize BFS
+    public void animateBFS()
+    {
+        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty() || destinationField.getText().isEmpty())
+        {
+            // Alert the user that the fields are required
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            String content = "Please fill all requested fields. i.e: source, destination";
+            alert.setContentText(content);
+            alert.showAndWait();
+            return;
+        }
+
+        int source, destination;
+        try
+        {
+            source = Integer.parseInt(sourceField.getText());
+            destination = Integer.parseInt(destinationField.getText());
+
+            // Checking if the fields are in valid range, if not then exception is raised
+            if(source < 0 || source >= count || destination < 0 || destination >= count)
+            {
+                throw new Exception();
+            }
+        }
+        catch (Exception e)
+        {
+            // Alert the user that the given input is invalid
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            String content = "Please enter valid input in Source and Destination Field";
+            alert.setContentText(content);
+            alert.showAndWait();
+            return;
+        }
+
+        // Run BFS on the graph class and get the layers and path
+        System.out.println("BFS: " + source + " -> " + destination);
+        Pair<ArrayList<ArrayList<Integer>>, ArrayList<Integer>> result = graph.bfs(source, destination);
+        ArrayList<ArrayList<Integer>> layers = result.getKey();
+        ArrayList<Integer> reversePath = result.getValue();
+
+        // Animate the layers and path using thread and sleep methods
+        Animation.animateBFS(source, destination, layers, reversePath, graphArea);
+    }
 
     // Function to draw circle on the graphArea
     public void addCircle(MouseEvent e)

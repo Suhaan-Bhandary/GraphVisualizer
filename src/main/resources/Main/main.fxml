@@ -32,17 +32,17 @@
                   </Label>
                   <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="31.0" text="Source" textFill="WHITE">
                      <graphic>
-                        <TextField prefHeight="24.0" prefWidth="106.0" promptText="Source Node" />
+                        <TextField fx:id="sourceField" prefHeight="24.0" prefWidth="106.0" promptText="Source Node" />
                      </graphic>
                   </Label>
                   <Label contentDisplay="RIGHT" layoutX="174.0" layoutY="31.0" text="Destination" textFill="WHITE">
                      <graphic>
-                        <TextField prefHeight="24.0" prefWidth="106.0" promptText="Dest Node" />
+                        <TextField fx:id="destinationField" prefHeight="24.0" prefWidth="106.0" promptText="Dest Node" />
                      </graphic>
                   </Label>
                   <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="67.0" text="Weight" textFill="WHITE">
                      <graphic>
-                        <TextField prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight" />
+                        <TextField fx:id="weightField" prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight" />
                      </graphic>
                   </Label>
                </children>
@@ -54,7 +54,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="51.0" text="BFS" />
+                  <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateBFS" prefHeight="24.0" prefWidth="51.0" text="BFS" />
                   <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="55.0" text="DFS" />
                   <Button layoutX="141.0" layoutY="32.0" mnemonicParsing="false" text="Components" />
                   <Button layoutX="11.0" layoutY="66.0" mnemonicParsing="false" text="Clear" />

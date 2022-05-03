@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="755b0273-20f5-4e64-8958-f9c4a58f89e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main/Animation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Animation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main/GraphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/GraphController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Main/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Main/main.fxml" afterDir="false" />
     </list>
@@ -35,18 +35,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/suhaan/Downloads/openjfx-18.0.1_linux-x64_bin-sdk/javafx-sdk-18.0.1/lib",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.18545455",
-    "project.structure.side.proportion": "0.40421054",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/suhaan/Downloads/openjfx-18.0.1_linux-x64_bin-sdk/javafx-sdk-18.0.1/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.18545455&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.40421054&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javavisualizer.HelloApplication" />
