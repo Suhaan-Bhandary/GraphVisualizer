@@ -32,7 +32,7 @@ public class GraphController {
     // Function to visualize BFS
     public void animateBFS()
     {
-        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty() || destinationField.getText().isEmpty())
+        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty())
         {
             // Alert the user that the fields are required
             Alert alert = new Alert(Alert.AlertType.ERROR);
