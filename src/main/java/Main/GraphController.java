@@ -108,12 +108,41 @@ public class GraphController {
             if(initialSelectedCircle == target) return;
 
             System.out.println("Second Circle Selected and Drawing the edge");
-            DrawShapes.drawEdge(initialSelectedCircle, target, graphArea);
+            // Get the weight for the edge
+            if(weightField.getText().isEmpty())
+            {
+                // Alert the user that the fields are required
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                String content = "Please fill the weight field!!";
+                alert.setContentText(content);
+                alert.showAndWait();
+                return;
+            }
+
+            int edgeWeight;
+            try
+            {
+                edgeWeight = Integer.parseInt(weightField.getText());
+                // Checking if the fields are in valid range, if not then exception is raised
+                if(edgeWeight <= 0 ) throw new Exception();
+            }
+            catch (Exception e)
+            {
+                // Alert the user that the given input is invalid
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                String content = "Edge weight cannot be negative";
+                alert.setContentText(content);
+                alert.showAndWait();
+                return;
+            }
+
+            // Draw the edge
+            DrawShapes.drawEdge(initialSelectedCircle, target, edgeWeight, graphArea);
 
             // Add edges in the graph matrix
             int u = Integer.parseInt(initialSelectedCircle.getId().split("__")[1]);
             int v = Integer.parseInt(target.getId().split("__")[1]);
-            graph.insertEdge(u,v, 1); // Edge weight is constant for now
+            graph.insertEdge(u,v, edgeWeight); // Edge weight is constant for now
             graph.display();
 
             // Reset the color of the initially selected circle

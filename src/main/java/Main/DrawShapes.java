@@ -1,6 +1,9 @@
 package Main;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -27,7 +30,7 @@ public class DrawShapes {
         graphArea.getChildren().add(text);
     }
 
-    public static void drawEdge(Circle source, Circle destination, AnchorPane graphArea) {
+    public static void drawEdge(Circle source, Circle destination, int weight, AnchorPane graphArea) {
         // getting the starting and ending points for drawing the line
         double x1 = source.getCenterX(), y1 = source.getCenterY();
         double x2 = destination.getCenterX(), y2 = destination.getCenterY();
@@ -44,5 +47,15 @@ public class DrawShapes {
 
         // Adding the line to the graphArea
         graphArea.getChildren().add(line);
+
+        // Let's add text to show the weight of the edge
+        Label edgeWeightText = new Label(Integer.toString(weight));
+        edgeWeightText.setLayoutX((x1 + x2) / 2 - 12);
+        edgeWeightText.setLayoutY((y1 + y2) / 2 - 12);
+        edgeWeightText.setBackground(Background.fill(Color.WHITE));
+        edgeWeightText.setPadding(new Insets(2));
+        edgeWeightText.setStyle("-fx-border-color: black;-fx-border-radius: 5px;");
+        edgeWeightText.setViewOrder(0);
+        if(weight != 1) graphArea.getChildren().add(edgeWeightText);
     }
 }

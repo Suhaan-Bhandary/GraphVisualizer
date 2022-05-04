@@ -42,7 +42,7 @@
                   </Label>
                   <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="67.0" text="Weight" textFill="WHITE">
                      <graphic>
-                        <TextField fx:id="weightField" prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight" />
+                        <TextField fx:id="weightField" prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight" text="1" />
                      </graphic>
                   </Label>
                </children>
@@ -57,7 +57,7 @@
                   <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateBFS" prefHeight="24.0" prefWidth="51.0" text="BFS" />
                   <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="55.0" text="DFS" />
                   <Button layoutX="141.0" layoutY="32.0" mnemonicParsing="false" onAction="#showComponents" text="Components" />
-                  <Button layoutX="11.0" layoutY="66.0" mnemonicParsing="false" onAction="#clearGraph" text="Clear" />
+                  <Button layoutX="12.0" layoutY="66.0" mnemonicParsing="false" onAction="#clearGraph" text="Clear" />
                   <Button layoutX="75.0" layoutY="66.0" mnemonicParsing="false" onAction="#resetGraph" prefHeight="22.0" prefWidth="55.0" text="Reset" />
                </children>
             </AnchorPane>

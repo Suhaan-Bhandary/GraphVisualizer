@@ -75,7 +75,7 @@ public class Graph {
 
             for(int i = 0; i < vertices; i++)
             {
-                if (matrix[curr][i] == 1 && (!visited[i]))
+                if (matrix[curr][i] != 0 && (!visited[i]))
                 {
                     q.add(i);
                     next_count++ ;
@@ -117,7 +117,7 @@ public class Graph {
         visited[curr] = component;
         for(int i = 0; i < vertices; i++)
         {
-            if (matrix[curr][i] == 1 && visited[i] == 0)
+            if (matrix[curr][i] != 0 && visited[i] == 0)
             {
                 component_dfs(i, component, visited);
             }
