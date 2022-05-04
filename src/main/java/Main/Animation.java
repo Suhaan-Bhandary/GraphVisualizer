@@ -59,7 +59,8 @@ public class Animation {
 
                 // Creating a store around the current node
                 Circle currNode = (Circle) graphArea.lookup("#circle__" + curr);
-                currNode.setStrokeWidth(1);
+                if(curr != source && curr != destination) currNode.setStroke(Color.ORANGE);
+                currNode.setStrokeWidth(2);
 
                 // Get the edge between the current and pre using the id, id can be in two forms pre-curr or curr-pre
                 Line currEdge = (Line) graphArea.lookup("#line__" + curr + "__" + pre);
