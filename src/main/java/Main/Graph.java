@@ -112,6 +112,48 @@ public class Graph {
         return new Pair<>(layers, reversePath);
     }
 
+    public void component_dfs(int curr, int component, int[] visited)
+    {
+        visited[curr] = component;
+        for(int i = 0; i < vertices; i++)
+        {
+            if (matrix[curr][i] == 1 && visited[i] == 0)
+            {
+                component_dfs(i, component, visited);
+            }
+        }
+    }
+    public ArrayList<ArrayList<Integer>> getComponents()
+    {
+        ArrayList<ArrayList<Integer>> components = new ArrayList<>();
+
+        // 0 means that it is not visited and other number means the component number
+        int[] visited = new int[vertices];
+        int component = 0;
+
+        // Go through all the vertices and find all the components
+        for(int i = 0; i < vertices; i++) {
+            if (visited[i] == 0){
+                component++;
+                component_dfs(i, component, visited);
+
+                // Check the visited array to find the nodes visited in current component of graph
+                ArrayList<Integer> temp = new ArrayList<>();
+                for(int node = 0; node < vertices; node++)
+                {
+                    if (visited[node] == component)
+                    {
+                        temp.add(node);
+                    }
+                }
+
+                // Add the current component to components
+                components.add(temp);
+            }
+        }
+        return components;
+    }
+
     public void reset()
     {
         vertices = 0;

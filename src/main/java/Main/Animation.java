@@ -2,6 +2,7 @@ package Main;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -78,5 +79,17 @@ public class Animation {
                 }
             }
         }).start();
+    }
+
+    public static void animateComponents(ArrayList<ArrayList<Integer>> components, AnchorPane graphArea) {
+        String[] colors = {"#f58231", "#ffe119", "#3cb44b", "#4363d8", "#e6194b", "#911eb4", "#46f0f0", "#f032e6", "#bcf60c", "#fabebe", "#008080", "#e6beff", "#9a6324", "#fffac8", "#800000", "#aaffc3", "#808000", "#ffd8b1", "#000075", "#808080", "#ffffff", "#000000"};
+        for (int i = 0; i < components.size(); i++)
+        {
+            for(Integer node: components.get(i))
+            {
+                Circle currNode = (Circle) graphArea.lookup("#circle__" + node);
+                currNode.setFill(Paint.valueOf(colors[i]));
+            }
+        }
     }
 }

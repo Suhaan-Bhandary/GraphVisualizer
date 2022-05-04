@@ -122,6 +122,13 @@ public class GraphController {
         }
     }
 
+    public void showComponents()
+    {
+        ArrayList<ArrayList<Integer>> components = graph.getComponents();
+        System.out.println("Components in the graph: " + components);
+        Animation.animateComponents(components, graphArea);
+    }
+
     // Function to reset the graph and the graph area
     public void resetGraph()
     {
