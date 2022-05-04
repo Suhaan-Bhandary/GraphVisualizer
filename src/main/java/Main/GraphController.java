@@ -1,6 +1,8 @@
 package Main;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -8,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -132,5 +135,29 @@ public class GraphController {
         Label headerText = (Label) graphArea.lookup("#headerText");
         graphArea.getChildren().clear();
         graphArea.getChildren().add(headerText);
+    }
+
+    public void clearGraph()
+    {
+        System.out.println("Clearing the Graph");
+
+        // Removing the selected node selection
+        initialSelectedCircle = null;
+
+        // Clear all the circles and lines to its default value
+        for(Node node: graphArea.getChildren())
+        {
+            if (node instanceof Line line)
+            {
+                line.setStroke(Color.BLACK);
+                line.setStrokeWidth(3);
+                line.setViewOrder(100);
+            }
+            else if(node instanceof Circle circle)
+            {
+                circle.setStrokeWidth(0);
+                circle.setFill(Color.LIGHTSKYBLUE);
+            }
+        }
     }
 }
