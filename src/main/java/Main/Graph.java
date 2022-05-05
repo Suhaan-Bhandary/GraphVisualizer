@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 // Taking the size of the matrix as 30
 public class Graph {
@@ -46,6 +47,30 @@ public class Graph {
         }
     }
 
+    ArrayList<Integer> dfs(int source,int destination) {
+
+        ArrayList<Integer> layerdfs = new ArrayList<>();
+        boolean[] visited = new boolean[vertices];
+
+        Stack<Integer> s = new Stack<>();
+        s.push(source);
+
+        visited[source] = true;
+        dfscall(source,visited,layerdfs);
+
+        return layerdfs;
+    }
+
+    public void dfscall(int curr,boolean visited[],ArrayList<Integer> layer){
+        visited[curr] = true;
+        layer.add(curr);
+
+        for (int i=0 ; i<vertices ; i++){
+            if(!visited[i] && matrix[curr][i] !=0){
+                dfscall(i,visited,layer);
+            }
+        }
+    }
     Pair<ArrayList<ArrayList<Integer>>, ArrayList<Integer>> bfs(int source, int destination)
     {
         // We will be using array list to store each layer

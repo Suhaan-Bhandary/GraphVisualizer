@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GraphController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GraphController">
    <center>
       <AnchorPane fx:id="graphArea" onMouseClicked="#addCircle" prefHeight="316.0" prefWidth="746.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
@@ -55,7 +55,7 @@
                      </font>
                   </Label>
                   <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateBFS" prefHeight="24.0" prefWidth="51.0" text="BFS" />
-                  <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="55.0" text="DFS" />
+                  <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateDFS" prefHeight="24.0" prefWidth="55.0" text="DFS" />
                   <Button layoutX="141.0" layoutY="32.0" mnemonicParsing="false" onAction="#showComponents" text="Dijkstra" />
                   <Button layoutX="12.0" layoutY="66.0" mnemonicParsing="false" onAction="#clearGraph" text="Clear" />
                   <Button layoutX="75.0" layoutY="66.0" mnemonicParsing="false" onAction="#resetGraph" prefHeight="22.0" prefWidth="55.0" text="Reset" />
