@@ -201,6 +201,7 @@ public class Graph {
             int currDist = curr.cost;
 
             visited[currNode] = true;
+            layer.add(currNode);
 
             if(currNode == destination)
                 break;
@@ -208,9 +209,9 @@ public class Graph {
             if (currDist > distance[currNode])
             {
                 System.out.println(currNode + " " + currDist);
-                layer.add(currNode);
                 continue;
             }
+
 
 
 
