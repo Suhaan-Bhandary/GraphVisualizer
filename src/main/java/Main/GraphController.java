@@ -77,7 +77,7 @@ public class GraphController {
 
     public void animateDFS()
     {
-        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty() || destinationField.getText().isEmpty())
+        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty())
         {
             // Alert the user that the fields are required
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -115,6 +115,52 @@ public class GraphController {
 
         // Animate the layers and path using thread and sleep methods
         Animation.animateDFS(source, destination, result, graphArea);
+    }
+
+    // animate dijkstra
+    public void animateDijkstra(){
+        if(sourceField.getText().isEmpty() || destinationField.getText().isEmpty())
+        {
+            // Alert the user that the fields are required
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            String content = "Please fill all requested fields. i.e: source, destination";
+            alert.setContentText(content);
+            alert.showAndWait();
+            return;
+        }
+
+        int source, destination;
+        try
+        {
+            source = Integer.parseInt(sourceField.getText());
+            destination = Integer.parseInt(destinationField.getText());
+
+            // Checking if the fields are in valid range, if not then exception is raised
+            if(source < 0 || source >= count || destination < 0 || destination >= count)
+            {
+                throw new Exception();
+            }
+        }
+        catch (Exception e)
+        {
+            // Alert the user that the given input is invalid
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            String content = "Please enter valid input in Source and Destination Field";
+            alert.setContentText(content);
+            alert.showAndWait();
+            return;
+        }
+
+        // Run dijkstra on the graph class and get the layers and path
+        System.out.println("DFS: " + source + " -> " + destination);
+
+
+        Pair<ArrayList<Integer>, ArrayList<Integer>> result =  graph.dijkstra(source,destination);
+        ArrayList<Integer> layer = result.getKey();
+        ArrayList<Integer> reversePath = result.getValue();
+
+        // Animate the layers and path using thread and sleep methods
+        Animation.animateDijkstra(source, destination, layer, reversePath, graphArea);
     }
 
     // Function to draw circle on the graphArea

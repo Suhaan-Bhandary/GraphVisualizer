@@ -128,4 +128,9 @@ public class Animation {
             }
         }
     }
+
+    public static void animateDijkstra(int source, int destination, ArrayList<Integer> layer, ArrayList<Integer> reversePath, AnchorPane graphArea) {
+        // animation to be done
+        System.out.println("animating dijkstra");
+    }
 }

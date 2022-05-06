@@ -1,10 +1,8 @@
 package Main;
 
 import javafx.util.Pair;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+
+import java.util.*;
 
 // Taking the size of the matrix as 30
 public class Graph {
@@ -71,7 +69,7 @@ public class Graph {
             }
         }
     }
-    Pair<ArrayList<ArrayList<Integer>>, ArrayList<Integer>> bfs(int source, int destination)
+    public Pair<ArrayList<ArrayList<Integer>>, ArrayList<Integer>> bfs(int source, int destination)
     {
         // We will be using array list to store each layer
         ArrayList<ArrayList<Integer>> layers = new ArrayList<>();
@@ -179,6 +177,73 @@ public class Graph {
         return components;
     }
 
+    public Pair<ArrayList<Integer>, ArrayList<Integer>> dijkstra(int source, int destination){
+        boolean visited[] = new boolean[vertices];
+        int distance[] = new int[vertices];
+        for (int i=0;i<vertices;i++){
+            distance[i] = Integer.MAX_VALUE;
+        }
+
+        distance[source] = 0;
+
+        int parent[] = new int[vertices];
+        parent[source] = -1;
+
+        PriorityQueue<Node> pq = new PriorityQueue<Node>(vertices,new Node());
+        pq.add(new Node(source, distance[source]));
+
+
+        ArrayList<Integer> layer = new ArrayList<>();
+
+        while (!pq.isEmpty()){
+            Node curr = pq.poll();
+            int currNode = curr.node;
+            int currDist = curr.cost;
+
+            visited[currNode] = true;
+
+            if(currNode == destination)
+                break;
+
+            if (currDist > distance[currNode])
+            {
+                System.out.println(currNode + " " + currDist);
+                layer.add(currNode);
+                continue;
+            }
+
+
+
+            for(int i = 0; i < vertices; i++)
+            {
+                if (matrix[currNode][i] != 0 && !visited[i] && distance[currNode] + matrix[currNode][i] < distance[i])
+                {
+                    parent[i] = currNode;
+                    distance[i] =  distance[currNode] + matrix[currNode][i];
+                    pq.add(new Node(i,distance[i]));
+                }
+            }
+
+        }
+        ArrayList<Integer> reversePath = new ArrayList<>();
+
+        System.out.println("before path");
+
+        int curr = destination;
+        while(curr != -1)
+        {
+            reversePath.add(curr);
+            System.out.println(curr);
+            curr = parent[curr];
+        }
+
+        System.out.println("After path");
+
+
+        return new Pair<>(layer, reversePath);
+    }
+
+
     public void reset()
     {
         vertices = 0;
@@ -191,3 +256,32 @@ public class Graph {
         }
     }
 }
+
+class Node implements Comparator<Node>
+{
+    public int node;
+    public int cost;
+
+    public Node()
+    {
+    }
+
+    public Node(int node, int cost)
+    {
+        this.node = node;
+        this.cost = cost;
+    }
+
+    @Override
+    public int compare(Node node1, Node node2)
+    {
+        if (node1.cost < node2.cost)
+            return -1;
+        if (node1.cost > node2.cost)
+            return 1;
+        return 0;
+    }
+}
+
+
+
