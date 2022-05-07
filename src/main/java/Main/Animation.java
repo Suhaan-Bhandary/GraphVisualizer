@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Animation {
 
+    private static int sleepTime = 2000;
     public static void animateBFS(int source, int destination ,ArrayList<ArrayList<Integer>> layers, ArrayList<Integer> reversePath, AnchorPane graphArea) {
         System.out.println("Animating BFS");
 
@@ -36,7 +37,7 @@ public class Animation {
 
                 // Sleep for one second
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -102,7 +103,7 @@ public class Animation {
                 currNode.setStrokeWidth(2);
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -146,7 +147,7 @@ public class Animation {
                 currNode.setStrokeWidth(2);
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
