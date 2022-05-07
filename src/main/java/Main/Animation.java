@@ -27,9 +27,7 @@ public class Animation {
                     Circle currNode = (Circle) graphArea.lookup("#circle__" + node);
 
                     // Color the nodes depending on the condition
-                    if(node == source) currNode.setFill(Color.YELLOW);
-                    else if(node == destination) currNode.setFill(Color.LIGHTGREEN);
-                    else currNode.setFill(Color.CRIMSON);
+                    currNode.setFill(Color.CRIMSON);
 
                     currNode.setStroke(Color.BLACK);
                     currNode.setStrokeWidth(2);
@@ -50,6 +48,14 @@ public class Animation {
                     if(node != source && node != destination) {
                         currNode.setFill(Color.LIGHTSKYBLUE);
                         currNode.setStrokeWidth(0);
+                    }
+                    else if (node == destination){
+                        currNode.setFill(Color.LIGHTGREEN);
+                        currNode.setStrokeWidth(2);
+                    }
+                    else {
+                        currNode.setFill(Color.YELLOW);
+                        currNode.setStrokeWidth(2);
                     }
                 }
             }
