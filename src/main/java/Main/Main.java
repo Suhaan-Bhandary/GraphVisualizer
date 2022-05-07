@@ -22,6 +22,7 @@ public class Main extends Application {
         scene.getStylesheets().add(mainCss);
 
         stage.setTitle("Graph Visualizer");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
