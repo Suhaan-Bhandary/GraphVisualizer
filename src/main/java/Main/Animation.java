@@ -196,5 +196,7 @@ public class Animation {
     }
 
 
-
+    public static void setSliderSpeed(int value) {
+        sleepTime = value;
+    }
 }

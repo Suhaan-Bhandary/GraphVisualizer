@@ -1,12 +1,10 @@
 package Main;
 
 import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -24,6 +22,9 @@ public class GraphController {
     private AnchorPane graphArea, gridMatrixArea;
     @FXML
     private TextField sourceField, destinationField, weightField;
+
+    @FXML
+    private Slider speedSlider;
 
     private int count = 0;
 
@@ -295,5 +296,11 @@ public class GraphController {
                 circle.setFill(Color.LIGHTSKYBLUE);
             }
         }
+    }
+
+    public void setAnimationSpeed(MouseEvent e)
+    {
+        // Set the value of static in the Animation class
+        Animation.setSliderSpeed((int)speedSlider.getValue());
     }
 }
