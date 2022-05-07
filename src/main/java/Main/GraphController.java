@@ -26,6 +26,9 @@ public class GraphController {
     @FXML
     private Slider speedSlider;
 
+    @FXML
+    private Label algorithmStatus;
+
     private int count = 0;
 
     // Variable to contain the first circle selected
@@ -74,6 +77,16 @@ public class GraphController {
 
         // Animate the layers and path using thread and sleep methods
         Animation.animateBFS(source, destination, layers, reversePath, graphArea);
+
+        // Change the text of the label
+        if(reversePath.size() > 0)
+        {
+            algorithmStatus.setText("Status: BFS Completed");
+        }
+        else
+        {
+            algorithmStatus.setText("Status: Source and destination are not connected!");
+        }
     }
 
     public void animateDFS()
@@ -112,10 +125,23 @@ public class GraphController {
 
         // Run BFS on the graph class and get the layers and path
         System.out.println("DFS: " + source + " -> " + destination);
-        ArrayList<Integer> result = graph.dfs(source, destination);
+        Pair<ArrayList<Integer>, Boolean> result = graph.dfs(source, destination);
+
+        ArrayList<Integer> layer = result.getKey();
+        Boolean isDestinationFound = result.getValue();
 
         // Animate the layers and path using thread and sleep methods
-        Animation.animateDFS(source, destination, result, graphArea);
+        Animation.animateDFS(source, destination, layer, graphArea);
+
+        // Change the text of the label
+        if(isDestinationFound)
+        {
+            algorithmStatus.setText("Status: DFS Completed");
+        }
+        else
+        {
+            algorithmStatus.setText("Status: No Connection between Source and Destination");
+        }
     }
 
     // animate dijkstra
@@ -162,6 +188,16 @@ public class GraphController {
 
         // Animate the layers and path using thread and sleep methods
         Animation.animateDijkstra(source, destination, layer, reversePath, graphArea);
+
+        // Change the text of the label
+        if(reversePath.size() > 0)
+        {
+            algorithmStatus.setText("Status: Dijkstra Completed");
+        }
+        else
+        {
+            algorithmStatus.setText("Status: Source and destination are not connected!");
+        }
     }
 
     // Function to draw circle on the graphArea
@@ -272,6 +308,9 @@ public class GraphController {
 
         // Make the initialSelectedCircle graph as null
         initialSelectedCircle = null;
+
+        // Clear the algorithm labels
+        algorithmStatus.setText("");
     }
 
     public void clearGraph()
@@ -296,6 +335,9 @@ public class GraphController {
                 circle.setFill(Color.LIGHTSKYBLUE);
             }
         }
+
+        // Clear the algorithm labels
+        algorithmStatus.setText("");
     }
 
     public void setAnimationSpeed(MouseEvent e)

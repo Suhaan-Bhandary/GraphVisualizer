@@ -45,7 +45,7 @@ public class Graph {
         }
     }
 
-    ArrayList<Integer> dfs(int source,int destination) {
+    Pair<ArrayList<Integer>, Boolean> dfs(int source,int destination) {
 
         ArrayList<Integer> layerdfs = new ArrayList<>();
         boolean[] visited = new boolean[vertices];
@@ -56,7 +56,9 @@ public class Graph {
         visited[source] = true;
         dfscall(source,visited,layerdfs);
 
-        return layerdfs;
+        Boolean destinationFound = visited[destination];
+
+        return new Pair<>(layerdfs, destinationFound);
     }
 
     public void dfscall(int curr,boolean visited[],ArrayList<Integer> layer){
@@ -123,6 +125,11 @@ public class Graph {
         System.out.println("before path");
 
         ArrayList<Integer> reversePath = new ArrayList<>();
+        if (!visited[destination])
+        {
+            return new Pair<>(layers, reversePath);
+        }
+
         int curr = destination;
         while(curr != -1)
         {
@@ -227,6 +234,10 @@ public class Graph {
 
         }
         ArrayList<Integer> reversePath = new ArrayList<>();
+        if (!visited[destination])
+        {
+            return new Pair<>(layer, reversePath);
+        }
 
         System.out.println("before path");
 
@@ -239,7 +250,6 @@ public class Graph {
         }
 
         System.out.println("After path");
-
 
         return new Pair<>(layer, reversePath);
     }
