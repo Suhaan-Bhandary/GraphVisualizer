@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -15,7 +16,9 @@ public class DrawShapes {
         // This function creates a circle and also add a text to it and makes it a child of graphArea
         // And also assigns an id to it
         Circle circle = new Circle(x, y, 30, color);
-        Text text = new Text(x - 3,y + 3, String.valueOf(number));
+        Text text = new Text(String.valueOf(number));
+        text.setX(x - text.getLayoutBounds().getWidth() / 2 + 1);
+        text.setY(y + 3);
 
         // Setting the view order of the circle and text, so that text is visible and circle doesn't overlap
         circle.setViewOrder(1);
@@ -57,5 +60,27 @@ public class DrawShapes {
         edgeWeightText.setStyle("-fx-border-color: black;-fx-border-radius: 5px;");
         edgeWeightText.setViewOrder(0);
         if(weight != 1) graphArea.getChildren().add(edgeWeightText);
+    }
+
+    public static void drawMatrix(int[][] matrix, int vertices, AnchorPane gridMatrixArea) {
+        System.out.println("Matrix Updating...");
+        gridMatrixArea.getChildren().clear();
+
+        // Creating a grid to display the matrix
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10));
+        grid.setHgap(15);
+        grid.setVgap(15);
+
+        for (int row = 0; row < vertices; row++)
+        {
+            for (int col = 0; col < vertices; col++)
+            {
+                Text text = new Text(Integer.toString(matrix[row][col]));
+                grid.add(text, row, col, 1, 1);
+            }
+        }
+
+        gridMatrixArea.getChildren().add(grid);
     }
 }

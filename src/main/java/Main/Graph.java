@@ -256,6 +256,14 @@ public class Graph {
             }
         }
     }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public int getVerticesCount() {
+        return vertices;
+    }
 }
 
 class Node implements Comparator<Node>

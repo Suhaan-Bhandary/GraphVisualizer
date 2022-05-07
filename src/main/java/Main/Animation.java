@@ -1,5 +1,7 @@
 package Main;
 
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -178,7 +180,9 @@ public class Animation {
                 }
 
                 // Highlight the edge between the current and previous node in the path
-                if(currEdge != null) currEdge.setStroke(Color.ORANGE);
+                if(currEdge != null) {
+                    currEdge.setStroke(Color.ORANGE);
+                }
 
                 // Sleep for 500 millisecond after each path is highlighted
                 try {

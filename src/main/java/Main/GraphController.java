@@ -21,7 +21,7 @@ public class GraphController {
 
     // Variables related to graph drawing
     @FXML
-    private AnchorPane graphArea;
+    private AnchorPane graphArea, gridMatrixArea;
     @FXML
     private TextField sourceField, destinationField, weightField;
 
@@ -180,17 +180,9 @@ public class GraphController {
         count++;
         graph.insertVertex();
         graph.display();
-    }
 
-    private Node createVertex(MouseEvent e) {
-        Button vertex = new Button();
-        vertex.setLayoutX(e.getX());
-        vertex.setLayoutY(e.getY());
-
-        vertex.translateXProperty().bind(vertex.widthProperty().divide(2));
-        vertex.translateYProperty().bind(vertex.heightProperty().divide(2));
-
-        return vertex;
+        // Updating the matrix
+        DrawShapes.drawMatrix(graph.getMatrix(), graph.getVerticesCount(), gridMatrixArea);
     }
 
     private void createEdge(Circle target)
@@ -247,6 +239,9 @@ public class GraphController {
             // Reset the color of the initially selected circle
             initialSelectedCircle.setFill(Color.LIGHTSKYBLUE);
             initialSelectedCircle = null;
+
+            // Update the matrix
+            DrawShapes.drawMatrix(graph.getMatrix(), graph.getVerticesCount(), gridMatrixArea);
         }
     }
 
@@ -270,6 +265,12 @@ public class GraphController {
         Label headerText = (Label) graphArea.lookup("#headerText");
         graphArea.getChildren().clear();
         graphArea.getChildren().add(headerText);
+
+        // Resetting the matrix
+        DrawShapes.drawMatrix(graph.getMatrix(), graph.getVerticesCount(), gridMatrixArea);
+
+        // Make the initialSelectedCircle graph as null
+        initialSelectedCircle = null;
     }
 
     public void clearGraph()
