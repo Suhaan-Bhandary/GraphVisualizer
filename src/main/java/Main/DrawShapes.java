@@ -8,6 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class DrawShapes {
@@ -72,12 +75,26 @@ public class DrawShapes {
         grid.setHgap(15);
         grid.setVgap(15);
 
+        // Creating a font for row and col index
+        Font indexFont = Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12);
+
+        // grid.add(element, columnId, rowId, columnSpan, rowSpan)
+        for (int i = 0; i < vertices; i++)
+        {
+            Text colText = new Text(Integer.toString(i));
+            colText.setFont(indexFont);
+            grid.add(colText, i + 1, 0, 1, 1);
+        }
         for (int row = 0; row < vertices; row++)
         {
+            Text rowText = new Text(Integer.toString(row));
+            rowText.setFont(indexFont);
+            grid.add(rowText, 0, row + 1, 1, 1);
+
             for (int col = 0; col < vertices; col++)
             {
                 Text text = new Text(Integer.toString(matrix[row][col]));
-                grid.add(text, row, col, 1, 1);
+                grid.add(text, col + 1, row + 1, 1, 1);
             }
         }
 
