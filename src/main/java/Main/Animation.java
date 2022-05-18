@@ -1,12 +1,11 @@
 package Main;
 
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 
@@ -93,7 +92,6 @@ public class Animation {
 
     public static void animateDFS(int source, int destination ,ArrayList<Integer> layer, AnchorPane graphArea) {
         System.out.println("Animating DFS");
-        boolean flag = false;
 
         new Thread(() ->{
             // Make all the circles crimson in the layer
@@ -193,7 +191,7 @@ public class Animation {
 
                 // Sleep for 500 millisecond after each path is highlighted
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -201,6 +199,34 @@ public class Animation {
         }).start();
     }
 
+    public static void animateSpanningTree(ArrayList<Pair<Integer, Integer>> components, AnchorPane graphArea) {
+        // Animating Spanning Tree
+        new Thread(() ->{
+            for (Pair<Integer, Integer> edge: components)
+            {
+                Integer point1 = edge.getKey();
+                Integer point2 = edge.getValue();
+
+                Line currEdge = (Line) graphArea.lookup("#line__" + point1 + "__" + point2);
+                if(currEdge == null)
+                {
+                    currEdge = (Line) graphArea.lookup("#line__" + point2 + "__" + point1);
+                }
+
+                // Highlight the edge between the current and previous node in the path
+                if(currEdge != null) {
+                    currEdge.setStroke(Color.ORANGE);
+                }
+
+                // Sleep for 500 millisecond after each path is highlighted
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
     public static void setSliderSpeed(int value) {
         Animation.sleepTime = value;

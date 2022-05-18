@@ -61,7 +61,7 @@ public class Graph {
         return new Pair<>(layerdfs, destinationFound);
     }
 
-    public void dfscall(int curr,boolean visited[],ArrayList<Integer> layer){
+    public void dfscall(int curr, boolean[] visited, ArrayList<Integer> layer){
         visited[curr] = true;
         layer.add(curr);
 
@@ -185,18 +185,18 @@ public class Graph {
     }
 
     public Pair<ArrayList<Integer>, ArrayList<Integer>> dijkstra(int source, int destination){
-        boolean visited[] = new boolean[vertices];
-        int distance[] = new int[vertices];
+        boolean[] visited = new boolean[vertices];
+        int[] distance = new int[vertices];
         for (int i=0;i<vertices;i++){
             distance[i] = Integer.MAX_VALUE;
         }
 
         distance[source] = 0;
 
-        int parent[] = new int[vertices];
+        int[] parent = new int[vertices];
         parent[source] = -1;
 
-        PriorityQueue<Node> pq = new PriorityQueue<Node>(vertices,new Node());
+        PriorityQueue<Node> pq = new PriorityQueue<>(vertices,new Node());
         pq.add(new Node(source, distance[source]));
 
 
@@ -218,9 +218,6 @@ public class Graph {
                 System.out.println(currNode + " " + currDist);
                 continue;
             }
-
-
-
 
             for(int i = 0; i < vertices; i++)
             {
@@ -254,6 +251,63 @@ public class Graph {
         return new Pair<>(layer, reversePath);
     }
 
+    // Adding Kruskal algorithm to get minimum spanning tree
+    // This function returns all the edges which will make a spanning tree
+    public ArrayList<Pair<Integer, Integer>> getSpanningTree()
+    {
+        // Array list to store all the edges
+        ArrayList<Pair<Integer, Integer>> edgeList = new ArrayList<>();
+
+        // default value of Boolean is false
+        boolean[] visited = new boolean[vertices];
+
+        // Create a priority queue to store the edge weight and the edge pair
+        PriorityQueue<Edge> pq = new PriorityQueue<>((vertices * vertices)/2,new Edge());
+
+        // Now First store all the edges from the lower or upper half triangle in the matrix
+        for (int i = 0; i < vertices; i++)
+        {
+            for (int j = i; j < vertices; j++)
+            {
+                if(matrix[i][j] > 0)
+                {
+                    pq.add(new Edge(i, j, matrix[i][j]));
+                }
+            }
+        }
+
+        // Create a disjoint set with the help of custom class with vertices count
+        DisjointUnionSet disjointUnionSet = new DisjointUnionSet(vertices);
+
+        int count = vertices - 1;
+        while(count != 0 && pq.size() > 0)
+        {
+            Edge currEdge = pq.poll();
+            if(!disjointUnionSet.isFromSameComponent(currEdge.source, currEdge.destination))
+            {
+                // Insert the edge in the solution
+                edgeList.add(new Pair<>(currEdge.source, currEdge.destination));
+
+                // Make the source and destination in one component
+                disjointUnionSet.union(currEdge.source, currEdge.destination);
+
+                visited[currEdge.source] = true;
+                visited[currEdge.destination] = true;
+                count--;
+            }
+        }
+
+        // Check if the graph is connected or not
+        for(int i = 0; i < vertices; i++)
+        {
+            if (!visited[i]) {
+                System.out.println(edgeList);
+                System.out.println(i);
+                return new ArrayList<>();
+            }
+        }
+        return edgeList;
+    }
 
     public void reset()
     {
@@ -294,11 +348,30 @@ class Node implements Comparator<Node>
     @Override
     public int compare(Node node1, Node node2)
     {
-        if (node1.cost < node2.cost)
-            return -1;
-        if (node1.cost > node2.cost)
-            return 1;
-        return 0;
+        return (node1.cost - node2.cost);
+    }
+}
+
+// The Edge class is used in spanning tree to get the minimum edges
+class Edge implements Comparator<Edge>
+{
+    public int source, destination, weight;
+
+    public Edge()
+    {
+
+    }
+    public Edge(int source, int destination, int weight)
+    {
+        this.source = source;
+        this.destination = destination;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compare(Edge edge1, Edge edge2)
+    {
+        return (edge1.weight - edge2.weight);
     }
 }
 

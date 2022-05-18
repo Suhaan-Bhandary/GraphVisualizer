@@ -1,10 +1,11 @@
 package Main;
 
-import javafx.collections.ObservableList;
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -289,6 +290,22 @@ public class GraphController {
         Animation.animateComponents(components, graphArea);
     }
 
+    public void showSpanningTree()
+    {
+        ArrayList<Pair<Integer, Integer>> components = graph.getSpanningTree();
+        System.out.println("Components in the graph: " + components);
+
+        if(components.size() > 0)
+        {
+            algorithmStatus.setText("Found the Minimum Spanning Tree using Kruskal");
+            Animation.animateSpanningTree(components, graphArea);
+        }
+        else
+        {
+            algorithmStatus.setText("Cannot find Minimum Spanning Tree");
+        }
+    }
+
     // Function to reset the graph and the graph area
     public void resetGraph()
     {
@@ -340,7 +357,7 @@ public class GraphController {
         algorithmStatus.setText("");
     }
 
-    public void setAnimationSpeed(MouseEvent e)
+    public void setAnimationSpeed()
     {
         // Set the value of static in the Animation class
         Animation.setSliderSpeed((int)speedSlider.getValue());
