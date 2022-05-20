@@ -46,28 +46,24 @@ public class Graph {
     }
 
     Pair<ArrayList<Integer>, Boolean> dfs(int source,int destination) {
-
-        ArrayList<Integer> layerdfs = new ArrayList<>();
+        ArrayList<Integer> layersDFS = new ArrayList<>();
         boolean[] visited = new boolean[vertices];
 
-        Stack<Integer> s = new Stack<>();
-        s.push(source);
-
         visited[source] = true;
-        dfscall(source,visited,layerdfs);
+        dfsCall(source,visited,layersDFS);
 
         Boolean destinationFound = visited[destination];
 
-        return new Pair<>(layerdfs, destinationFound);
+        return new Pair<>(layersDFS, destinationFound);
     }
 
-    public void dfscall(int curr, boolean[] visited, ArrayList<Integer> layer){
+    public void dfsCall(int curr, boolean[] visited, ArrayList<Integer> layer){
         visited[curr] = true;
         layer.add(curr);
 
         for (int i=0 ; i<vertices ; i++){
             if(!visited[i] && matrix[curr][i] !=0){
-                dfscall(i,visited,layer);
+                dfsCall(i,visited,layer);
             }
         }
     }
