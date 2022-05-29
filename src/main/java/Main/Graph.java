@@ -8,6 +8,9 @@ import java.util.*;
 public class Graph {
     private final int[][] matrix;
     private int vertices;
+
+    // Variable which is used for finding articulation point and bridges
+    private int counter;
     Graph()
     {
         System.out.println("Graph Created");
@@ -303,6 +306,125 @@ public class Graph {
             }
         }
         return edgeList;
+    }
+
+    // Bridges in the Graph
+    public ArrayList<Pair<Integer, Integer>> getBridges()
+    {
+        ArrayList<Pair<Integer, Integer>> bridges = new ArrayList<>();
+
+        int[] tim = new int[vertices];
+        int[] low = new int[vertices];
+        boolean[] visited = new boolean[vertices];
+
+        // Going through all the components of the graph
+        for(int i = 0; i < vertices; i++)
+        {
+            if (!visited[i])
+            {
+                counter = 0;
+                dfsOfBridge(i, -1 , tim, low, visited, bridges);
+            }
+        }
+
+        return bridges;
+    }
+
+    private void dfsOfBridge(int curr, int parent, int[] tim, int[] low, boolean[] visited, ArrayList<Pair<Integer, Integer>> bridges) {
+        tim[curr] = low[curr] = counter;
+        counter++;
+        visited[curr] = true;
+
+        for (int i = 0; i < vertices; i++)
+        {
+            if(matrix[curr][i] == 0 || i == parent) continue;
+
+            if (!visited[i])
+            {
+                dfsOfBridge(i, curr, tim, low, visited, bridges);
+
+                // Update the low here
+                if(low[i] < low[curr]) {
+                    low[curr] = low[i];
+                }
+
+                if (low[i] > tim[curr])
+                {
+                    bridges.add(new Pair<>(curr, i));
+                }
+            }
+            else
+            {
+                if(tim[i] < low[curr]) {
+                    low[curr] = tim[i];
+                }
+            }
+        }
+    }
+
+    // Function to find articulation points
+    public Set<Integer> getArticulationPoints() {
+        Set<Integer> articulationPoints = new HashSet<>();
+
+        int[] tim = new int[vertices];
+        int[] low = new int[vertices];
+        boolean[] visited = new boolean[vertices];
+
+        // Going through all the components of the graph
+        for(int i = 0; i < vertices; i++)
+        {
+            if (!visited[i])
+            {
+                counter = 0;
+                dfsOfArticulation(i, -1 , tim, low, visited, articulationPoints);
+            }
+        }
+
+        return articulationPoints;
+    }
+
+    private void dfsOfArticulation(int curr, int parent, int[] tim, int[] low, boolean[] visited, Set<Integer> articulationPoints) {
+        tim[curr] = low[curr] = counter;
+        counter++;
+        visited[curr] = true;
+
+        int child = 0;
+        for (int i = 0; i < vertices; i++)
+        {
+            if(matrix[curr][i] == 0 || i == parent) continue;
+
+            if (!visited[i])
+            {
+                // Child is calculated for the special case
+                child++;
+
+                dfsOfArticulation(i, curr, tim, low, visited, articulationPoints);
+
+                // Update the low here
+                if(low[i] < low[curr]) {
+                    low[curr] = low[i];
+                }
+
+                // The root node has its own special case
+                if (low[i] >= tim[curr] && parent != -1)
+                {
+                    System.out.println("point : " +  curr);
+                    articulationPoints.add(curr);
+                }
+            }
+            else
+            {
+                if(tim[i] < low[curr]) {
+                    low[curr] = tim[i];
+                }
+            }
+        }
+
+        // Here child represents the individual Child Components
+        if (parent == -1 && child > 1)
+        {
+            articulationPoints.add(curr);
+        }
     }
 
     public void reset()

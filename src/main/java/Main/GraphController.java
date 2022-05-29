@@ -14,6 +14,7 @@ import javafx.scene.shape.Line;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class GraphController {
     private final Graph graph = new Graph();
@@ -303,6 +304,38 @@ public class GraphController {
         else
         {
             algorithmStatus.setText("Cannot find Minimum Spanning Tree");
+        }
+    }
+
+    public void showBridges()
+    {
+        ArrayList<Pair<Integer, Integer>> bridges = graph.getBridges();
+        System.out.println("Bridges in the graph: " + bridges);
+
+        if(bridges.size() > 0)
+        {
+            algorithmStatus.setText("Calculated All the Bridges in the Graph");
+            Animation.animateBridges(bridges, graphArea);
+        }
+        else
+        {
+            algorithmStatus.setText("No Bridges Found in the graph");
+        }
+    }
+
+    public void showArticulationPoints()
+    {
+        Set<Integer> articulationPoints = graph.getArticulationPoints();
+        System.out.println("Articulation points in the graph are: " + articulationPoints);
+
+        if(articulationPoints.size() > 0)
+        {
+            algorithmStatus.setText("Calculated all Articulation Points in the Graph");
+            Animation.animateArticulationPoints(articulationPoints, graphArea);
+        }
+        else
+        {
+            algorithmStatus.setText("No Articulation Point Found in the graph");
         }
     }
 

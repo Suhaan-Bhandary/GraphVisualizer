@@ -8,6 +8,7 @@ import javafx.scene.shape.Line;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Animation {
 
@@ -217,6 +218,53 @@ public class Animation {
                 if(currEdge != null) {
                     currEdge.setStroke(Color.ORANGE);
                 }
+
+                // Sleep for 500 millisecond after each path is highlighted
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public static void animateBridges(ArrayList<Pair<Integer, Integer>> bridges, AnchorPane graphArea) {
+        // Animating Bridges
+        new Thread(() ->{
+            for (Pair<Integer, Integer> edge: bridges)
+            {
+                Integer point1 = edge.getKey();
+                Integer point2 = edge.getValue();
+
+                Line bridge = (Line) graphArea.lookup("#line__" + point1 + "__" + point2);
+                if(bridge == null)
+                {
+                    bridge = (Line) graphArea.lookup("#line__" + point2 + "__" + point1);
+                }
+
+                // Highlight the edge between the current and previous node in the path
+                if(bridge != null) {
+                    bridge.setStroke(Color.RED);
+                }
+
+                // Sleep for 500 millisecond after each path is highlighted
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public static void animateArticulationPoints(Set<Integer> articulationPoints, AnchorPane graphArea) {
+        // Articulation Points animation
+        new Thread(() ->{
+            for (Integer node: articulationPoints)
+            {
+                Circle currNode = (Circle) graphArea.lookup("#circle__" + node);
+                currNode.setFill(Color.RED);
 
                 // Sleep for 500 millisecond after each path is highlighted
                 try {

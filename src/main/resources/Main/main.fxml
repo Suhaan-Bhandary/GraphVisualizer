@@ -12,14 +12,13 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GraphController">
    <center>
-      <AnchorPane fx:id="graphArea" onMouseClicked="#addCircle" prefHeight="305.0" prefWidth="384.0"
-                  style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="graphArea" onMouseClicked="#addCircle" prefHeight="305.0" prefWidth="384.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <Label fx:id="headerText" layoutX="14.0" layoutY="14.0" text="Graph Visualizer">
             <font>
-               <Font name="System Bold" size="13.0"/>
+               <Font name="System Bold" size="13.0" />
             </font>
          </Label>
-         <Label fx:id="algorithmStatus" layoutX="14.0" layoutY="36.0"/>
+         <Label fx:id="algorithmStatus" layoutX="14.0" layoutY="36.0" />
       </AnchorPane>
    </center>
    <bottom>
@@ -27,59 +26,51 @@
          <AnchorPane prefHeight="147.0" prefWidth="1000.0" style="-fx-background-color: #141c39;">
             <Label layoutX="10.0" layoutY="7.0" text="Values" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="13.0"/>
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="31.0" text="Source" textFill="WHITE">
                <graphic>
-                  <TextField fx:id="sourceField" prefHeight="24.0" prefWidth="106.0" promptText="Source Node"/>
+                  <TextField fx:id="sourceField" prefHeight="24.0" prefWidth="106.0" promptText="Source Node" />
                </graphic>
             </Label>
             <Label contentDisplay="RIGHT" layoutX="174.0" layoutY="31.0" text="Destination" textFill="WHITE">
                <graphic>
-                  <TextField fx:id="destinationField" prefHeight="24.0" prefWidth="106.0" promptText="Dest Node"/>
+                  <TextField fx:id="destinationField" prefHeight="24.0" prefWidth="106.0" promptText="Dest Node" />
                </graphic>
             </Label>
             <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="67.0" text="Weight" textFill="WHITE">
                <graphic>
-                  <TextField fx:id="weightField" prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight"
-                             text="1"/>
+                  <TextField fx:id="weightField" prefHeight="24.0" prefWidth="106.0" promptText="Edge Weight" text="1" />
                </graphic>
             </Label>
+            <Button layoutX="74.0" layoutY="101.0" mnemonicParsing="false" onAction="#resetGraph" prefHeight="22.0" prefWidth="55.0" text="Reset" />
+            <Button layoutX="9.0" layoutY="101.0" mnemonicParsing="false" onAction="#clearGraph" prefHeight="24.0" prefWidth="53.0" text="Clear" />
          </AnchorPane>
-         <AnchorPane id="ActionContainer" prefHeight="300.0" prefWidth="1000.0"
-                     style="-fx-background-color: #141c39;">
+         <AnchorPane id="ActionContainer" prefHeight="300.0" prefWidth="1000.0" style="-fx-background-color: #141c39;">
             <Label layoutX="10.0" layoutY="5.0" text="Actions" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="13.0"/>
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateBFS" prefHeight="24.0"
-                    prefWidth="51.0" text="BFS"/>
-            <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateDFS" prefHeight="24.0"
-                    prefWidth="55.0" text="DFS"/>
-            <Button layoutX="141.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateDijkstra"
-                    text="Dijkstra"/>
-            <Button layoutX="141.0" layoutY="66.0" mnemonicParsing="false" onAction="#clearGraph" prefHeight="24.0"
-                    prefWidth="69.0" text="Clear"/>
-            <Button layoutX="220.0" layoutY="66.0" mnemonicParsing="false" onAction="#resetGraph" prefHeight="22.0"
-                    prefWidth="55.0" text="Reset"/>
-            <Button layoutX="220.0" layoutY="32.0" mnemonicParsing="false" onAction="#showComponents"
-                    text="Components"/>
+            <Button layoutX="11.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateBFS" prefHeight="24.0" prefWidth="51.0" text="BFS" />
+            <Button layoutX="75.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateDFS" prefHeight="24.0" prefWidth="55.0" text="DFS" />
+            <Button layoutX="141.0" layoutY="32.0" mnemonicParsing="false" onAction="#animateDijkstra" text="Dijkstra" />
+            <Button layoutX="220.0" layoutY="32.0" mnemonicParsing="false" onAction="#showComponents" text="Components" />
             <Label contentDisplay="RIGHT" layoutX="9.0" layoutY="106.0" text="Animation Speed" textFill="WHITE">
                <graphic>
-                  <Slider fx:id="speedSlider" blockIncrement="0.1" max="5000.0" onMouseReleased="#setAnimationSpeed"
-                          value="2000.0"/>
+                  <Slider fx:id="speedSlider" blockIncrement="0.1" max="5000.0" onMouseReleased="#setAnimationSpeed" value="2000.0" />
                </graphic>
             </Label>
-            <Button layoutX="11.0" layoutY="66.0" mnemonicParsing="false" onAction="#showSpanningTree"
-                    prefHeight="24.0" prefWidth="120.0" text="Spanning Tree"/>
+            <Button layoutX="11.0" layoutY="66.0" mnemonicParsing="false" onAction="#showSpanningTree" prefHeight="24.0" prefWidth="120.0" text="Spanning Tree" />
+            <Button layoutX="141.0" layoutY="66.0" mnemonicParsing="false" onAction="#showBridges" text="Bridges" />
+            <Button layoutX="220.0" layoutY="66.0" mnemonicParsing="false" onAction="#showArticulationPoints" prefHeight="24.0" prefWidth="101.0" text="Articulation" />
          </AnchorPane>
       </HBox>
    </bottom>
    <right>
       <ScrollPane prefHeight="305.0" prefWidth="372.0" BorderPane.alignment="CENTER">
-         <AnchorPane fx:id="gridMatrixArea" prefHeight="200.0" prefWidth="200.0"/>
+         <AnchorPane fx:id="gridMatrixArea" prefHeight="200.0" prefWidth="200.0" />
       </ScrollPane>
    </right>
 </BorderPane>
